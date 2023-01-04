@@ -12,7 +12,7 @@ class Kindle:
         # POST parameters
         params = {
             'search' : name,
-            'limit' : 200,
+            'limit' : 200, # High enough number to avoid having several pages
             'offset' : 0,
             'ko' : 1,
             'foilcard': '',
