@@ -6,6 +6,10 @@ import sys
 class Kindle:
 
     BASE_SEARCH_URL: str = 'http://www.mtgkindleshop.com/kindle/search_result.php'
+
+    def run(self):
+        input_name = 'Negate' if len(sys.argv) == 1 else sys.argv[1] if len(sys.argv) == 2 else ' '.join(sys.argv[1:]) # Python evaluates from right to left
+        self.search_card_prices(input_name)
     
 
     def search_card_prices(self, name: str):
@@ -36,7 +40,6 @@ class Kindle:
                     stocks.append(int(stock.split(' / ')[0].split(' : ')[1])) # Stock of non-korean cards in NM condition. Structure: 'NM(영문) : 6 / NM(한글) : -'
                 price_div = div.find(id='kindlePrice')
                 for pr in price_div.find_all(id='kindlePriceMax'):
-                    price = pr.get_text()
                     price: str = re.sub(r'[^0-9]','',pr.get_text())
                     prices.append(int(price) if price != '' else 0)
                 for idx in range(len(stocks)):
@@ -50,5 +53,4 @@ class Kindle:
 
 if __name__ == '__main__':
     k = Kindle()
-    input_name = 'Negate' if len(sys.argv) == 1 else sys.argv[1] if len(sys.argv) == 2 else ' '.join(sys.argv[1:]) # Python evaluates from right to left
-    k.search_card_prices(input_name)
+    k.run()

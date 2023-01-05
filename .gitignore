@@ -1,2 +1,3 @@
-app/
+venv/
 .vscode/
+__pycache__/
