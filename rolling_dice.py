@@ -63,7 +63,7 @@ class Rolling_Dice:
                 flag = tr.contents[0].find('img').attrs['src']
                 lang = self.FLAGS[flag] if flag in self.FLAGS else '?'
                 if lang == 'KR':
-                    break # For now we are only looking for non-KR cards
+                    continue # For now we are only looking for non-KR cards
                 stock = tr.contents[1].getText()
                 stock: int = int(re.sub(r'[^0-9]','',stock))
                 print(card_name, '({})'.format(lang), '-', f'{price:,}'+'원', '(Stock: {})'.format(stock))
