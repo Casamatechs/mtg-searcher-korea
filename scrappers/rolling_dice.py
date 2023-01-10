@@ -2,8 +2,9 @@ from bs4 import BeautifulSoup
 import requests
 import re
 import sys
+import warnings
 
-class Rolling_Dice:
+class __Rolling_Dice:
 
     BASE_SEARCH_URL: str = 'http://www.mtgrollingdice.com/index.php?mode=listtext&name={}&rarity=&type=normal&ln={}&ctype=&porder=&color=&page={}'
     COOKIES = {
@@ -70,5 +71,6 @@ class Rolling_Dice:
             # print(stock_price)
 
 if __name__ == '__main__':
-    rd = Rolling_Dice()
+    warnings.warn("This script is deprecated. Please use Openbinder (it includes RD stock)", DeprecationWarning)
+    rd = __Rolling_Dice()
     rd.run()

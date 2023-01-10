@@ -3,13 +3,15 @@ import requests
 import re
 import sys
 
+sys.path.append('..') # Import sibling dirs
+
 class Kindle:
 
     BASE_SEARCH_URL: str = 'http://www.mtgkindleshop.com/kindle/search_result.php'
 
     def run(self):
         input_name = 'Negate' if len(sys.argv) == 1 else sys.argv[1] if len(sys.argv) == 2 else ' '.join(sys.argv[1:]) # Python evaluates from right to left
-        self.search_card_prices(input_name)
+        self.search_card_prices(input_name.replace('\'',''))
     
 
     def search_card_prices(self, name: str):

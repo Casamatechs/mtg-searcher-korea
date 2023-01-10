@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package cards;
+
+service CardService {
+    rpc GetCardStock(Card_Request) returns (Card_Response) {
+
+    }
+}
+
+message Card_Request {
+    string name = 1;
+}
+
+message Card_Response {
+    repeated Card cards = 1;
+}
+
+message Card {
+    string name = 1;
+    string lang = 2;
+    string cond = 3;
+    string store = 4;
+    int32 price = 5;
+    int32 stock = 6;
+    bool foil = 7;
+    string set = 8;
+}
