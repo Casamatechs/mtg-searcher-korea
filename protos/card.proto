@@ -3,7 +3,7 @@ syntax = "proto3";
 package cards;
 
 service CardService {
-    rpc GetCardStock(Card_Request) returns (Card_Response) {
+    rpc GetCardStock(Card_Request) returns (stream Card_Response) {
 
     }
 }

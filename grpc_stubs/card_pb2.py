@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x15grpc_stubs/card.proto\x12\x05\x63\x61rds\"\x1c\n\x0c\x43\x61rd_Request\x12\x0c\n\x04name\x18\x01 \x01(\t\"+\n\rCard_Response\x12\x1a\n\x05\x63\x61rds\x18\x01 \x03(\x0b\x32\x0b.cards.Card\"k\n\x04\x43\x61rd\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04lang\x18\x02 \x01(\t\x12\x0c\n\x04\x63ond\x18\x03 \x01(\t\x12\r\n\x05store\x18\x04 \x01(\t\x12\r\n\x05price\x18\x05 \x01(\x05\x12\r\n\x05stock\x18\x06 \x01(\x05\x12\x0c\n\x04\x66oil\x18\x07 \x01(\x08\x32J\n\x0b\x43\x61rdService\x12;\n\x0cGetCardStock\x12\x13.cards.Card_Request\x1a\x14.cards.Card_Response\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x15grpc_stubs/card.proto\x12\x05\x63\x61rds\"\x1c\n\x0c\x43\x61rd_Request\x12\x0c\n\x04name\x18\x01 \x01(\t\"+\n\rCard_Response\x12\x1a\n\x05\x63\x61rds\x18\x01 \x03(\x0b\x32\x0b.cards.Card\"x\n\x04\x43\x61rd\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04lang\x18\x02 \x01(\t\x12\x0c\n\x04\x63ond\x18\x03 \x01(\t\x12\r\n\x05store\x18\x04 \x01(\t\x12\r\n\x05price\x18\x05 \x01(\x05\x12\r\n\x05stock\x18\x06 \x01(\x05\x12\x0c\n\x04\x66oil\x18\x07 \x01(\x08\x12\x0b\n\x03set\x18\x08 \x01(\t2L\n\x0b\x43\x61rdService\x12=\n\x0cGetCardStock\x12\x13.cards.Card_Request\x1a\x14.cards.Card_Response\"\x00\x30\x01\x62\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'grpc_stubs.card_pb2', globals())
@@ -25,7 +25,7 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _CARD_RESPONSE._serialized_start=62
   _CARD_RESPONSE._serialized_end=105
   _CARD._serialized_start=107
-  _CARD._serialized_end=214
-  _CARDSERVICE._serialized_start=216
-  _CARDSERVICE._serialized_end=290
+  _CARD._serialized_end=227
+  _CARDSERVICE._serialized_start=229
+  _CARDSERVICE._serialized_end=305
 # @@protoc_insertion_point(module_scope)

@@ -2,8 +2,13 @@ from bs4 import BeautifulSoup
 import requests
 import re
 import sys
+from typing import List
 
-sys.path.append('..') # Import sibling dirs
+# To avoid import errors
+sys.path.append('..')
+sys.path.append('.')
+
+from grpc_stubs.card_pb2 import Card
 
 class Kindle:
 
@@ -11,7 +16,15 @@ class Kindle:
 
     def run(self):
         input_name = 'Negate' if len(sys.argv) == 1 else sys.argv[1] if len(sys.argv) == 2 else ' '.join(sys.argv[1:]) # Python evaluates from right to left
-        self.search_card_prices(input_name.replace('\'',''))
+        ret = self.search_card_prices(input_name.replace('\'',''))
+        for c in ret:
+            if c.foil:
+                print(c.store, '::', '[NM]', c.name, '({}-FOIL)'.format('ENG'),'-', f'{c.price:,}'+'원', '(Stock: {})'.format(c.stock))
+            else:
+                print(c.store, '::', '[NM]', c.name, '({})'.format('ENG'), '-', f'{c.price:,}'+'원', '(Stock: {})'.format(c.stock))
+
+    def server_call(self, name: str) -> List[Card]:
+        return self.search_card_prices(name.replace('\'',''))
     
 
     def search_card_prices(self, name: str):
@@ -31,6 +44,7 @@ class Kindle:
         # Card ID - It is hardcoded in Kindle's SSR and can be used to find stock and price information
         c_id = 1001
         # We have to iterate over all divs with id = cardStyle. These divs contain all the useful information we need.
+        cards: List[Card]= []
         for div in soup.find_all('div', attrs={'id':'cardStyle'}):
             scrapped_name = div.find(id='enName').get_text()
             if 'Art Series' not in scrapped_name and name in scrapped_name:
@@ -47,10 +61,13 @@ class Kindle:
                 for idx in range(len(stocks)):
                     if stocks[idx] > 0:
                         if idx == 0: # NM
-                            print(scrapped_name, '-', f'{prices[idx]:,}'+'원', '(Stock: {})'.format(stocks[idx]))
+                            cards.append(Card(name=scrapped_name,store='Kindle',price=prices[idx],stock=stocks[idx],foil=False))
+                            # print(scrapped_name, '-', f'{prices[idx]:,}'+'원', '(Stock: {})'.format(stocks[idx]))
                         if idx == 1: # FOIL
-                            print(scrapped_name, '(FOIL)', '-', f'{prices[idx]:,}'+'원', '(Stock: {})'.format(stocks[idx]))
+                            cards.append(Card(name=scrapped_name,store='Kindle',price=prices[idx],stock=stocks[idx],foil=True))
+                            # print(scrapped_name, '(FOIL)', '-', f'{prices[idx]:,}'+'원', '(Stock: {})'.format(stocks[idx]))
             c_id += 1001
+        return cards
 
 
 if __name__ == '__main__':

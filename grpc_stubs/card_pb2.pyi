@@ -6,12 +6,13 @@ from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Map
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class Card(_message.Message):
-    __slots__ = ["cond", "foil", "lang", "name", "price", "stock", "store"]
+    __slots__ = ["cond", "foil", "lang", "name", "price", "set", "stock", "store"]
     COND_FIELD_NUMBER: _ClassVar[int]
     FOIL_FIELD_NUMBER: _ClassVar[int]
     LANG_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
     PRICE_FIELD_NUMBER: _ClassVar[int]
+    SET_FIELD_NUMBER: _ClassVar[int]
     STOCK_FIELD_NUMBER: _ClassVar[int]
     STORE_FIELD_NUMBER: _ClassVar[int]
     cond: str
@@ -19,9 +20,10 @@ class Card(_message.Message):
     lang: str
     name: str
     price: int
+    set: str
     stock: int
     store: str
-    def __init__(self, name: _Optional[str] = ..., lang: _Optional[str] = ..., cond: _Optional[str] = ..., store: _Optional[str] = ..., price: _Optional[int] = ..., stock: _Optional[int] = ..., foil: bool = ...) -> None: ...
+    def __init__(self, name: _Optional[str] = ..., lang: _Optional[str] = ..., cond: _Optional[str] = ..., store: _Optional[str] = ..., price: _Optional[int] = ..., stock: _Optional[int] = ..., foil: bool = ..., set: _Optional[str] = ...) -> None: ...
 
 class Card_Request(_message.Message):
     __slots__ = ["name"]

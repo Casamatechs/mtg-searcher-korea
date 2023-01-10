@@ -14,7 +14,7 @@ class CardServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.GetCardStock = channel.unary_unary(
+        self.GetCardStock = channel.unary_stream(
                 '/cards.CardService/GetCardStock',
                 request_serializer=grpc__stubs_dot_card__pb2.Card_Request.SerializeToString,
                 response_deserializer=grpc__stubs_dot_card__pb2.Card_Response.FromString,
@@ -33,7 +33,7 @@ class CardServiceServicer(object):
 
 def add_CardServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'GetCardStock': grpc.unary_unary_rpc_method_handler(
+            'GetCardStock': grpc.unary_stream_rpc_method_handler(
                     servicer.GetCardStock,
                     request_deserializer=grpc__stubs_dot_card__pb2.Card_Request.FromString,
                     response_serializer=grpc__stubs_dot_card__pb2.Card_Response.SerializeToString,
@@ -59,7 +59,7 @@ class CardService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/cards.CardService/GetCardStock',
+        return grpc.experimental.unary_stream(request, target, '/cards.CardService/GetCardStock',
             grpc__stubs_dot_card__pb2.Card_Request.SerializeToString,
             grpc__stubs_dot_card__pb2.Card_Response.FromString,
             options, channel_credentials,

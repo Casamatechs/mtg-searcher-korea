@@ -7,7 +7,8 @@ from grpc_stubs import card_pb2, card_pb2_grpc
 
 def get_cards(stub: card_pb2_grpc.CardServiceStub):
     cards = stub.GetCardStock(card_pb2.Card_Request(name="Demonic Tutor"))
-    print(cards)
+    for card in cards:
+        print(card)
 
 def run():
     with grpc.insecure_channel('localhost:50051') as channel:

@@ -12,7 +12,9 @@ class CardServicer(card_pb2_grpc.CardServiceServicer):
         self.openbinder = openbinder.Openbinder()
 
     def GetCardStock(self, request: card_pb2.Card_Request, context):
-        return card_pb2.Card_Response(cards=self.openbinder.server_call(request.name))
+        yield card_pb2.Card_Response(cards=self.kindle.server_call(request.name))
+        for cards_set in self.openbinder.server_call(request.name):
+            yield card_pb2.Card_Response(cards=cards_set)
 
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
@@ -24,5 +26,5 @@ def serve():
     server.wait_for_termination()
 
 if __name__ == '__main__':
-    logging.basicConfig()
+    logging.basicConfig(level=logging.INFO)
     serve()
