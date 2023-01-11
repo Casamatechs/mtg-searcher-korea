@@ -35,8 +35,7 @@ class Openbinder:
         'image/G.png' : 'G'
     }
 
-    def run(self):
-        input_name = 'Demonic Tutor' if len(sys.argv) == 1 else sys.argv[1] if len(sys.argv) == 2 else ' '.join(sys.argv[1:]) # Python evaluates from right to left
+    def run(self, input_name: str):
         ret = self.search_card_prices(input_name)
         for card_set in ret:
             for c in card_set:
@@ -103,7 +102,3 @@ class Openbinder:
             stock = stock.split(')')[0][5:-1]
             set_cards.append(Card(name=name,lang=flag,cond=condition,store=store_name,price=int(re.sub(r'[^0-9]','',price)),stock=int(stock),foil=True,set=set_id))
         return set_cards
-
-if __name__ == '__main__':
-    o = Openbinder()
-    o.run()

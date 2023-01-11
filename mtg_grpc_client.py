@@ -6,9 +6,15 @@ import grpc
 from grpc_stubs import card_pb2, card_pb2_grpc
 
 def get_cards(stub: card_pb2_grpc.CardServiceStub):
-    cards = stub.GetCardStock(card_pb2.Card_Request(name="Demonic Tutor"))
+    cards = stub.GetCardStock(card_pb2.Card_Request(name="Negate"))
+    stock = False
     for card in cards:
-        print(card)
+        for c in card.cards:
+            stock = True
+            print(c)
+    if not stock:
+        print('No stock')
+            
 
 def run():
     with grpc.insecure_channel('localhost:50051') as channel:
