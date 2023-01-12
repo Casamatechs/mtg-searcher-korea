@@ -19,6 +19,7 @@ class Openbinder:
         'flag/Nx20xen.png.pagespeed.ic.9nFGTBPnvk.png' : 'ENG',
         'flag/Nx20xko.png.pagespeed.ic.SQ6MPfgFC-.png' : 'KR',
         'flag/Nx20xja.png.pagespeed.ic.e0vM4KWyoN.png' : 'JP',
+        './flag/jp.png' : 'JP',
         'flag/Nx20xge.png.pagespeed.ic.raJ410vWQh.png' : 'GER',
         'flag/Nx20xru.png.pagespeed.ic.fJ-01jLnWY.png' : 'RU',
         './flag/ru.png' : 'RU'
