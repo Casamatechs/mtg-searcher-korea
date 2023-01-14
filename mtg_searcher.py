@@ -16,9 +16,14 @@ if __name__ == '__main__':
     else:
         input_name = ' '.join(sys.argv[1:])
     search_results = [c['value'] for c in requests.get('https://openbinder.co.kr/cardnameonlysearch.php?term={}'.format(input_name)).json() if '(Art)' not in c['value']]
+    choice_index = 0
 
-    terminal_menu = TerminalMenu(search_results)
-    choice_index = terminal_menu.show()
+    if len(search_results) == 0:
+        print("No cards found")
+        sys.exit(1)
+    elif len(search_results) > 1:
+        terminal_menu = TerminalMenu(search_results)
+        choice_index = terminal_menu.show()
 
     k.run(search_results[choice_index] if '//' not in search_results[choice_index] else search_results[choice_index].replace('//','-'))
     o.run(search_results[choice_index])
