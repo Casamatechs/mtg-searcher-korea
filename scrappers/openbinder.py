@@ -91,6 +91,8 @@ class Openbinder:
             flag = self.FLAGS[flag.attrs['src']]
             condition = self.CONDITION[condition.attrs['src']]
             store_name = store.find('a').getText()
+            if (store.find('p').getText() == '판매자의 설정에 문제가 있습니다. 판매자에게 문의하십시오.'):
+                continue
             price, stock = store.find('p').getText().split(' (')
             stock = stock.split(')')[0][5:-1]
             set_cards.append(Card(name=name,lang=flag,cond=condition,store=store_name,price=int(re.sub(r'[^0-9]','',price)),stock=int(stock),foil=False,set=set_id))
