@@ -22,7 +22,8 @@ class Openbinder:
         './flag/jp.png' : 'JP',
         'flag/Nx20xge.png.pagespeed.ic.raJ410vWQh.png' : 'GER',
         'flag/Nx20xru.png.pagespeed.ic.fJ-01jLnWY.png' : 'RU',
-        './flag/ru.png' : 'RU'
+        './flag/ru.png' : 'RU',
+        'flag/Nx20xit.png.pagespeed.ic.cFFE78eSEJ.png' : 'ITA'
     }
 
     CONDITION = {
