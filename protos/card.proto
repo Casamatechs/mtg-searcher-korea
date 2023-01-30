@@ -28,4 +28,5 @@ message Card {
     int32 stock = 6;
     bool foil = 7;
     string set = 8;
+    string imgUrl = 9;
 }

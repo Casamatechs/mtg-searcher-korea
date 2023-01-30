@@ -6,7 +6,7 @@ import grpc
 from grpc_stubs import card_pb2, card_pb2_grpc
 
 def get_cards(stub: card_pb2_grpc.CardServiceStub):
-    cards = stub.GetCardStock(card_pb2.Card_Request(name="Negate"))
+    cards = stub.GetCardStock(card_pb2.Card_Request(name="Chord of Calling"))
     stock = False
     for card in cards:
         for c in card.cards:

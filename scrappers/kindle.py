@@ -12,6 +12,7 @@ from grpc_stubs.card_pb2 import Card
 
 class Kindle:
 
+    BASE_URL: str = 'http://www.mtgkindleshop.com'
     BASE_SEARCH_URL: str = 'http://www.mtgkindleshop.com/kindle/search_result.php'
 
     def run(self, input_name: str):
@@ -45,6 +46,7 @@ class Kindle:
         # We have to iterate over all divs with id = cardStyle. These divs contain all the useful information we need.
         cards: List[Card]= []
         for div in soup.find_all('div', attrs={'id':'cardStyle'}):
+            img_url = div.find('img').attrs['src'].replace('..',self.BASE_URL).replace(' ','%20')
             scrapped_name = div.find(id='enName').get_text()
             if 'Art Series' not in scrapped_name and name in scrapped_name:
                 stocks = []
@@ -60,10 +62,10 @@ class Kindle:
                 for idx in range(len(stocks)):
                     if stocks[idx] > 0:
                         if idx == 0: # NM
-                            cards.append(Card(name=scrapped_name,store='Kindle',price=prices[idx],stock=stocks[idx],foil=False))
+                            cards.append(Card(name=scrapped_name,store='Kindle',price=prices[idx],stock=stocks[idx],foil=False, imgUrl=img_url))
                             # print(scrapped_name, '-', f'{prices[idx]:,}'+'원', '(Stock: {})'.format(stocks[idx]))
                         if idx == 1: # FOIL
-                            cards.append(Card(name=scrapped_name,store='Kindle',price=prices[idx],stock=stocks[idx],foil=True))
+                            cards.append(Card(name=scrapped_name,store='Kindle',price=prices[idx],stock=stocks[idx],foil=True, imgUrl=img_url))
                             # print(scrapped_name, '(FOIL)', '-', f'{prices[idx]:,}'+'원', '(Stock: {})'.format(stocks[idx]))
             c_id += 1001
         return cards

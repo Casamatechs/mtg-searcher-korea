@@ -84,6 +84,7 @@ class Openbinder:
     def search_card_price(self, url: str, name: str, set_id: str) -> List[Card]:
         r = requests.get(url)
         soup = BeautifulSoup(r.text, 'html.parser')
+        img_url = soup.find('img',attrs={'class':'cardimageinfo'}).attrs['src']
         normal = soup.find('div',attrs={'id':'tab-normal'}) # Normal stock
         foil = soup.find('div',attrs={'id':'tab-foil'}) # Foil stock
         set_cards: List[Card] = []
@@ -96,7 +97,7 @@ class Openbinder:
                 continue
             price, stock = store.find('p').getText().split(' (')
             stock = stock.split(')')[0][5:-1]
-            set_cards.append(Card(name=name,lang=flag,cond=condition,store=store_name,price=int(re.sub(r'[^0-9]','',price)),stock=int(stock),foil=False,set=set_id))
+            set_cards.append(Card(name=name,lang=flag,cond=condition,store=store_name,price=int(re.sub(r'[^0-9]','',price)),stock=int(stock),foil=False,set=set_id, imgUrl=img_url))
         for store in foil.find_all('div',attrs={'class','card-body'}):
             flag, condition = store.find_all('img')[1:] # First image is the store picture, not necessary.
             flag = self.FLAGS[flag.attrs['src']]
@@ -104,5 +105,5 @@ class Openbinder:
             store_name = store.find('a').getText()
             price, stock = store.find('p').getText().split(' (')
             stock = stock.split(')')[0][5:-1]
-            set_cards.append(Card(name=name,lang=flag,cond=condition,store=store_name,price=int(re.sub(r'[^0-9]','',price)),stock=int(stock),foil=True,set=set_id))
+            set_cards.append(Card(name=name,lang=flag,cond=condition,store=store_name,price=int(re.sub(r'[^0-9]','',price)),stock=int(stock),foil=True,set=set_id,imgUrl=img_url))
         return set_cards
